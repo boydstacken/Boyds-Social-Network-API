@@ -1,22 +1,19 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const data = require('./models/user');
-const bodyParser = require('body-parser')
+const express = require('express');
+const db = require('./config/connection');
+const routes = require('./routes');
 
+
+const PORT = process.env.PORT || 3001;
 const app = express();
-const PORT = 3001
 
+// Note: not necessary for the Express server to function. This just helps indicate what activity's server is running in the terminal.
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(routes);
 
-app.use(bodyParser.json())
-
-mongoose.connect('mongodb://127.0.0.1/my_database', {useNewUrlParser: true, useUnifiedTopology: true})
-    .then (()=> {
-        console.log('Connected to MongoDB')
-        app.listen (PORT, () => {
-            console.log (`Server is running on port ${PORT}`)
-        })
-    })
-    .catch ((err) => {
-        console.log('Could not connect to MongoDB', err)
-    })
+db.once('open', () => {
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+  });
+});
