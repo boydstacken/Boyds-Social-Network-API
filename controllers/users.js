@@ -62,7 +62,11 @@ module.exports = {
             console.log(err);
             res.status(500).json(err);
         }
-    }
+    },
+
+    //POST to add a new friend to a user's friend list. DELETE to remove a friend from a user's friend list
+
+
         
 }
 
