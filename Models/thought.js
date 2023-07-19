@@ -17,8 +17,6 @@ reactionsSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
 })
 
-module.exports = Reaction;
-
 //thought Schema is created with designated fields
 const thoughtSchema = new mongoose.Schema({
     thoughtText: {type: String, required: true, minlength: 1, maxlength: 280},
@@ -30,9 +28,6 @@ const thoughtSchema = new mongoose.Schema({
         const officialCreatedAt = this.createdAt.toLocaleString();
         return officialCreatedAt;
     })
-
-const document = await thought.findById(documentId)
-console.log(document.officalCreatedAt)
 
 thoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
