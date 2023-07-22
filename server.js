@@ -8,8 +8,7 @@ const mongoose = require ('mongoose');
 mongoose.connect('mongodb://localhost:3001/db', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
-
+})
 .then(() => {
 const PORT = process.env.PORT || 3001;
 const app = express();
