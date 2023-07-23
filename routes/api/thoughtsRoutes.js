@@ -6,7 +6,7 @@ router.route('/api/thoughts').get(getThoughts)
 
 router.route('/api/thughts/:thoughtId').get(getSingleThought)
 
-router.route('/api/thoughts').post(createThought).push(createThought)
+router.route('/api/thoughts').post(createThought)
 
 router.route('/api/thoughts/:thoughtId').put(updateThought)
 
