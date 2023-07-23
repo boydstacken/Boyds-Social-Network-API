@@ -1,8 +1,9 @@
 const mongoose = require ('mongoose');
 const Thought = require('../Models/Thought');
+const Reaction = require('..Models/Thought')
 
 module.exports = {
-    //get all thought
+    //get all thoughts
     async getThoughts(req,res){
     try {
         const thoughts = await User.find(req.body);
@@ -30,15 +31,16 @@ module.exports = {
     //creates new thought
     async createThought(req,res) {
         try {
-            const thought = await Thought.create(req.body)
+            const thought = await Thought.create(req.getSingleThought)
             res.json(thought)
         } catch (err) {
             this.res.status(500).json(err)
         }
     },
+    //updates thought
     async updateThought(req, res) {
         try {
-          const thoughr = await Thought.findOneAndUpdate({ _id: req.params.thoughtId });
+          const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId });
     
           if (!thought) {
             return res.status(404).json({ message: 'No such thought exists' })
@@ -49,6 +51,7 @@ module.exports = {
       res.status(500).json(err);
     }
     },
+    //deletes thought
     async deleteThought(req, res) {
         try {
             const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
@@ -60,5 +63,33 @@ module.exports = {
             console.log(err);
             res.status(500).json(err);
         }
+    },
+    //creates reaction by id
+    async createReaction (req, res) {
+            try {
+              const reaction = await Thought.create({ reactions });
+        
+              if (!reaction) {
+                return res.status(404).json({ message: 'No such reaction exists' })
+              }
+    
+              res.json(reaction);
+        } catch (err) {
+          res.status(500).json(err);
+        }
+    },
+    //deletes and removes reaction by id
+    async deleteReaction (req, res) {
+        try {
+          const reaction = await Thought.delete({ _id: req.params.reactionId });
+    
+          if (!reaction) {
+            return res.status(404).json({ message: 'No such reaction exists' })
+          }
+
+          res.json(reaction);
+    } catch (err) {
+      res.status(500).json(err);
+    }
     }
 }
