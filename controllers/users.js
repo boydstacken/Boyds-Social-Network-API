@@ -5,16 +5,17 @@ module.exports = {
     //get all users
     async getUsers(req,res){
     try {
-        const users = await User.find(req.body);
-        res.json(user);
+        const users = await User.find();
+        res.json(users);
     } catch (err) {
+        console.log(err)
         res.status(500).json(err);
     }
     },
     //get a single user
     async getSingleUser(req, res) {
         try {
-            const user = await User.findOne({_id: req.params.userId})
+            const users = await User.findOne({_id: req.params.userId})
             .select('-__v')
             .lean()
         
