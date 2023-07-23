@@ -1,6 +1,5 @@
 const mongoose = require ('mongoose');
 const Thought = require('../Models/Thought');
-const Reaction = require('..Models/Thought')
 
 module.exports = {
     //get all thoughts
