@@ -19,11 +19,11 @@ module.exports = {
             .select('-__v')
             .lean()
         
-            if(!student) {
+            if(!users) {
                 return res.status(404).json({ message: 'No user with that ID' });
             }
 
-            res.json(user)
+            res.json(users)
         }catch (err) {
             res.status(500).json(err);
         }
@@ -31,8 +31,8 @@ module.exports = {
     //creates new user
     async createUser(req,res) {
         try {
-            const user = await User.create(req.body)
-            res.json(user)
+            const users = await User.create(req.body)
+            res.json(users)
         } catch (err) {
             this.res.status(500).json(err)
         }
@@ -40,13 +40,13 @@ module.exports = {
     //updates user
     async updateUser(req, res) {
         try {
-          const user = await User.findOneAndUpdate({ _id: req.params.userId });
+          const users = await User.findOneAndUpdate({ _id: req.params.userId });
     
-          if (!user) {
+          if (!users) {
             return res.status(404).json({ message: 'No such user exists' })
           }
 
-          res.json(user);
+          res.json(users);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -54,7 +54,7 @@ module.exports = {
     //deletes user
     async deleteUser(req, res) {
         try {
-            const user = await Student.findOneAndRemove({ _id: req.params.userId });
+            const users = await User.findOneAndRemove({ _id: req.params.userId });
       
             if (!student) {
               return res.status(404).json({ message: 'No such user exists' })

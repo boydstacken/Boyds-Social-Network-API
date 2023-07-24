@@ -4,18 +4,11 @@ const {getUsers,getSingleUser, createUser, updateUser, deleteUser} = require("..
 const User = require('../../models/user')
 
 //api/users
-router.route('/').get(getUsers)
+router.route('/').get(getUsers).post(createUser)
 
-router.route('/api/user/:userId').get(getSingleUser)
+router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser)
 
-router.route('/api/user').post(createUser)
+router.route('/:userId/friends/:friendId').put(updateUser).delete(deleteUser)
 
-router.route('/api/user/:userId').put(updateUser)
-
-router.route('/api/user/:userId').delete(deleteUser)
-
-router.route('/api/user/:userId/friends/:friendId').put(updateUser)
-
-router.route('/api/user/:userId/friends/:friendId').delete(deleteUser)
 
 module.exports = router;

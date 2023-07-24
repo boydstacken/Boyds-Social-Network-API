@@ -4,20 +4,20 @@ const {getThoughts, getSingleThought, createThought, updateThought, deleteThough
 //api/thoughts
 router.route('/').get(getThoughts)
 
-router.route('/api/thoughts/:thoughtId').get(getSingleThought)
+router.route('thoughts/:thoughtId').get(getSingleThought)
 
-router.route('/api/thoughts').post(createThought)
+router.route('thoughts').post(createThought)
 
-router.route('/api/thoughts/:thoughtId').put(updateThought)
+router.route('thoughts/:thoughtId').put(updateThought)
 
-router.route('/api/thoughts/:thoughtId').delete(deleteThought)
+router.route('/thoughts/:thoughtId').delete(deleteThought)
 
 ///api/thoughts/:thoughtId/reactions
 
 
-router.route('api/thoughts/:thoughtId/reactions').post(createReaction)
+router.route('/thoughts/:thoughtId/reactions').post(createReaction)
 
 
-router.route('/api/thought/:userId/friends/:friendId').delete(deleteReaction)
+router.route('thoughts/:userId/friends/:friendId').delete(deleteReaction)
 
 module.exports = router;
