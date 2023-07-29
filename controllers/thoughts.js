@@ -69,9 +69,9 @@ module.exports = {
     async createReaction (req, res) {
             console.log(req.body)
       try {
-              usersSchema = await findOneAndUpdate(
+              usersSchema = await Thought.findOneAndUpdate(
                   {_id: req.params.thoughtId},
-                  {$addtoSet: {reactions: req.body}},
+                  {addToSet: {reactions: req.body}},
                   {runValidators: true, new:true} 
               )
               if (!usersSchema) {
@@ -80,6 +80,7 @@ module.exports = {
     
               res.json(usersSchema);
         } catch (err) {
+          console.log(err)
           res.status(500).json(err);
         }
     },
