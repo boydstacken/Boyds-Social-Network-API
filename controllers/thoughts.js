@@ -69,7 +69,13 @@ module.exports = {
     async createReaction (req, res) {
             console.log(req.body)
       try {
-              const reactions = await Thought.create({ _id: req.params.thoughtId.reactions }, req.body, {new: true});
+              const reactions = await reactionsSchema.create(
+                [{
+                  reactionId: req.body.thoughtId,
+                  reactionBody: req.body.thoughtText,
+                  username: req.body.username
+                }], 
+              )
               if (!reactions) {
                 return res.status(404).json({ message: 'No such reaction exists' })
               }
