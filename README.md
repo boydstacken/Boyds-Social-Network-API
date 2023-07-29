@@ -20,7 +20,8 @@ Insomnia will also be needed to test your code and functionality with GET routes
 
 ## Usage
 
-Here's the link to the video tutorial: https://boyds-note-taker-bd99890ceea8.herokuapp.com/
+Here's the link to the video tutorial: https://drive.google.com/file/d/14G9yMQkEhxIxifA95fm-HeDW1FQ5ou84/view
+
 
 Do a npm install in the terminal to get all the npm package along with Express.js, a MongoDB database, and Mongoose ODM will be used too.
 

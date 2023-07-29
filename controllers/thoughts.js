@@ -86,13 +86,13 @@ module.exports = {
     },
     //deletes and removes reaction by id
     async deleteReaction (req, res) {
+      console.log(req.body)
         try {
-          usersSchema = await Thought.findOneAndRemove(
-            {_id: req.params.thoughtId},
-            {$addToSet: {reactions: req.body}},
-            {runValidators: true, new:true} 
-        )
-
+          usersSchema = await Thought.findOneAndUpdate(
+              {_id: req.params.thoughtId},
+              {$pull: {reactions: { reactionId: req.params.reactionId}}},
+              {runValidators: true, new:true} 
+          )
           if (!usersSchema) {
             return res.status(404).json({ message: 'No such reaction exists' })
           }
