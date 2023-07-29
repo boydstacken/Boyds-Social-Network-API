@@ -3,49 +3,52 @@ const Thought = require('../Models/Thought');
 
 module.exports = {
     //get all thoughts
-    async getThoughts(req,res){
+    async getThoughts(req, res){
     try {
         const thoughts = await Thought.find(req.body);
-        res.json(thought);
+        res.json(thoughts);
     } catch (err) {
-        res.status(500).json(err);
+      console.log(err);
+      res.status(500).json(err);
     }
-    },
+   },
     //get a single thought
     async getSingleThought(req, res) {
         try {
-            const thought = await Thought.findOne({_id: req.params.thoughtId})
+            const thoughts = await Thought.findOne({_id: req.params.thoughtId})
             .select('-__v')
             .lean()
         
-            if(!thought) {
+            if(!thoughts) {
                 return res.status(404).json({ message: 'No thought with that ID' });
             }
 
-            res.json(user)
+            res.json(thoughts)
         }catch (err) {
             res.status(500).json(err);
         }
     },
     //creates new thought
     async createThought(req,res) {
+      console.log(req.body)
         try {
-            const thought = await Thought.create(req.getSingleThought)
-            res.json(thought)
+            const thoughts = await Thought.create(req.body)
+            res.json(thoughts)
         } catch (err) {
-            this.res.status(500).json(err)
+            res.status(500).json(err)
         }
     },
     //updates thought
     async updateThought(req, res) {
+      console.log(req.body)
         try {
-          const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId });
+          const thoughts = await Thought.findOneAndUpdate({ _id: req.params.thoughtId });
     
-          if (!thought) {
+          if (!thoughts) {
             return res.status(404).json({ message: 'No such thought exists' })
           }
 
-          res.json(thought);
+          res.json(thoughts);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -53,9 +56,9 @@ module.exports = {
     //deletes thought
     async deleteThought(req, res) {
         try {
-            const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
+            const thoughts = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
       
-            if (!thought) {
+            if (!thoughts) {
               return res.status(404).json({ message: 'No thought user exists' })
             }
         } catch (err) {
@@ -66,13 +69,13 @@ module.exports = {
     //creates reaction by id
     async createReaction (req, res) {
             try {
-              const reaction = await Thought.create({ reactions });
+              const reactions = await Thought.create({ reactions });
         
-              if (!reaction) {
+              if (!reactions) {
                 return res.status(404).json({ message: 'No such reaction exists' })
               }
     
-              res.json(reaction);
+              res.json(reactions);
         } catch (err) {
           res.status(500).json(err);
         }
@@ -80,13 +83,13 @@ module.exports = {
     //deletes and removes reaction by id
     async deleteReaction (req, res) {
         try {
-          const reaction = await Thought.delete({ _id: req.params.reactionId });
+          const reactions = await Thought.delete({ _id: req.params.reactionId });
     
-          if (!reaction) {
+          if (!reactions) {
             return res.status(404).json({ message: 'No such reaction exists' })
           }
 
-          res.json(reaction);
+          res.json(reactions);
     } catch (err) {
       res.status(500).json(err);
     }
