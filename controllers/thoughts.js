@@ -71,7 +71,7 @@ module.exports = {
       try {
               usersSchema = await Thought.findOneAndUpdate(
                   {_id: req.params.thoughtId},
-                  {addToSet: {reactions: req.body}},
+                  {$addToSet: {reactions: req.body}},
                   {runValidators: true, new:true} 
               )
               if (!usersSchema) {
@@ -87,14 +87,19 @@ module.exports = {
     //deletes and removes reaction by id
     async deleteReaction (req, res) {
         try {
-          const reactions = await Thought.delete({ _id: req.params.reactionId });
-    
-          if (!reactions) {
+          usersSchema = await Thought.findOneAndRemove(
+            {_id: req.params.thoughtId},
+            {$addToSet: {reactions: req.body}},
+            {runValidators: true, new:true} 
+        )
+
+          if (!usersSchema) {
             return res.status(404).json({ message: 'No such reaction exists' })
           }
 
-          res.json(reactions);
+          res.json(usersSchema);
     } catch (err) {
+      console.log(err)
       res.status(500).json(err);
     }
     }
